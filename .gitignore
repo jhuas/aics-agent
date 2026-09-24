@@ -1,0 +1,52 @@
+# ============================================================
+# 智客服 · AI 电商客服 Agent 平台 —— 仓库忽略规则
+# 原则：只提交源码；运行时数据、密钥、大体积环境一律不入库
+# ============================================================
+
+# ---- 运行时数据（含真实客服会话 / 经营数据，涉及隐私，严禁入库）----
+backend/data/agent_events.jsonl
+backend/data/agent_events_test.jsonl
+backend/data/sessions.json
+backend/data/ops_real.json
+backend/data/*.db
+backend/data/memory/
+backend/data/reference_images/
+agent/logs/
+logs/
+screenshots/
+
+# ---- 含密钥的运行配置（仓库内提供 backend/config.example.json）----
+backend/config.json
+/config.json
+
+# ---- 内置便携环境 / 构建产物 / 大体积素材 ----
+# 注意：仅忽略根目录的 dist / build，frontend/dist 构建产物需入库（评委开箱即跑）
+tools/python/
+release/
+build_tmp/
+/dist/
+/build/
+*.spec
+视频教程/
+素材库/
+
+# ---- CDP 调试浏览器数据（体积极大，通常数百 MB）----
+.chrome-debug/
+.chrome-profile/
+C/chrome-debug-profile/
+
+# ---- Python ----
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+
+# ---- 前端 ----
+frontend/node_modules/
+frontend/.vite/
+
+# ---- 开发临时文件 ----
+_pdfcheck/
+*.log
+*.tmp

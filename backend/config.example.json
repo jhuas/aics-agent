@@ -1,0 +1,8 @@
+{
+  "deepseek_api_key": "",
+  "deepseek_base_url": "https://api.deepseek.com",
+  "deepseek_model": "deepseek-chat",
+  "store_name": "魔克摩托改装（示例店）",
+  "enable_llm": true,
+  "_说明": "复制本文件为 backend/config.json 后填写 deepseek_api_key。config.json 已被 .gitignore 排除，不会入库。密钥也可在网页右上角「API 配置」中填写。"
+}

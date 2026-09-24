@@ -1,0 +1,10 @@
+{
+  "workbench_url": "https://mms.pinduoduo.com/chat-merchant/index.html#/",
+  "poll_interval_seconds": 30,
+  "poll_timeout_seconds": 600,
+  "max_consecutive_unknown": 3,
+  "headless": false,
+  "screenshot_each_reply": true,
+  "log_dir": "logs",
+  "screenshot_dir": "screenshots"
+}

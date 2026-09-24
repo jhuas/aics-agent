@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>智客服 · AI 电商客服 Agent 平台</title>
+<link rel="stylesheet" href="/assets/css/style.css">
+</head>
+<body>
+
+<!-- ══════════ 顶栏 ══════════ -->
+<header class="topbar">
+  <div class="brand">
+    <div class="brand-logo" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 3l7 3v5c0 4.5-3 8.4-7 10-4-1.6-7-5.5-7-10V6l7-3z"/>
+        <path d="M9 12l2 2 4-4"/>
+      </svg>
+    </div>
+    <div class="brand-text">
+      <h1>智客服</h1>
+      <p>AI 电商客服 Agent 平台</p>
+    </div>
+  </div>
+
+  <div class="topbar-right">
+    <div class="store-name" id="storeName">魔克摩托改装</div>
+    <div class="status-chip" id="llmStatus">
+      <span class="dot"></span>
+      <span class="status-text">检测中</span>
+    </div>
+    <button class="icon-btn" id="btnSettings" title="API 配置" aria-label="API 配置">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="3"/>
+        <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09a1.65 1.65 0 0 0-1-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09a1.65 1.65 0 0 0 1.51-1 1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33h.01a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51h.01a1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82v.01a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+      </svg>
+    </button>
+  </div>
+</header>
+
+<!-- ══════════ 主区域 ══════════ -->
+<main class="layout">
+
+  <!-- ── 左：聊天区 ── -->
+  <section class="chat-panel">
+    <div class="chat-head">
+      <div class="chat-head-title">
+        <span class="live-dot"></span>
+        <h2>模拟客户会话</h2>
+      </div>
+      <span class="chat-head-sub">演示模式 · 实时决策</span>
+    </div>
+
+    <div class="chat-stream" id="chatStream" role="log" aria-live="polite"></div>
+
+    <div class="chat-ctrl">
+      <div class="quick-row">
+        <span class="quick-label">快捷演示</span>
+        <div class="quick-chips" id="quickChips">
+          <button class="chip" data-text="你好">打招呼</button>
+          <button class="chip" data-text="有安装教程吗">问教程</button>
+          <button class="chip" data-text="脚踏板怎么安装">脚踏安装</button>
+          <button class="chip" data-text="定风翼堵盖怎么安装">定风翼安装</button>
+          <button class="chip" data-text="给我看下定风翼堵盖">看定风翼</button>
+          <button class="chip" data-text="我的车是奔达金吉拉450，能装吗">库外车型</button>
+          <button class="chip" data-text="我要退款">退款</button>
+          <button class="chip" data-text="天气不错啊">闲聊</button>
+        </div>
+      </div>
+      <div class="input-row">
+        <input type="text" id="chatInput" placeholder="输入客户消息，体验 AI 客服决策…" maxlength="200" autocomplete="off">
+        <button class="send-btn" id="btnSend" aria-label="发送">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 2L11 13"/>
+            <path d="M22 2l-7 20-4-9-9-4 20-7z"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 右：决策追踪 + 统计 ── -->
+  <aside class="side-panel">
+    <section class="trace-panel">
+      <div class="panel-head">
+        <h3>AI 决策追踪</h3>
+        <span class="panel-tag" id="traceResultTag">待命</span>
+      </div>
+      <div class="trace-body" id="traceBody">
+        <div class="trace-idle">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/>
+            <path d="M12 6v6l4 2"/>
+          </svg>
+          <p>发送一条消息，查看混合引擎的<br>护栏 → 知识库 → 大模型 → 合规 全链路决策</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="stats-panel">
+      <div class="panel-head">
+        <h3>运行统计</h3>
+        <button class="link-btn" id="btnClear">清空</button>
+      </div>
+      <div class="kpi-row">
+        <div class="kpi"><span class="kpi-num" id="kpiSessions">0</span><span class="kpi-label">会话</span></div>
+        <div class="kpi"><span class="kpi-num" id="kpiMessages">0</span><span class="kpi-label">消息</span></div>
+        <div class="kpi"><span class="kpi-num" id="kpiEscalated">0</span><span class="kpi-label">转人工</span></div>
+      </div>
+      <div class="chart-block">
+        <h4>响应渠道</h4>
+        <div class="bars" id="channelBars"></div>
+      </div>
+      <div class="chart-block">
+        <h4>动作分布</h4>
+        <div class="bars" id="actionBars"></div>
+      </div>
+    </section>
+  </aside>
+</main>
+
+<!-- ══════════ API 配置弹窗 ══════════ -->
+<div class="modal-mask" id="settingsModal" hidden>
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-head">
+      <h3 id="modalTitle">DeepSeek API 配置</h3>
+      <button class="icon-btn" data-close aria-label="关闭">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+    <p class="modal-desc">密钥仅保存在本地 <code>backend/config.json</code>，不会上传 GitHub。填写后立即生效，无需重启。</p>
+    <label class="field-label" for="keyInput">DeepSeek API Key</label>
+    <input type="password" id="keyInput" class="text-input" placeholder="sk-…" autocomplete="off">
+    <div class="modal-foot">
+      <button class="btn-ghost" data-close>取消</button>
+      <button class="btn-primary" id="btnSaveKey">保存</button>
+    </div>
+    <p class="modal-hint" id="keyHint">获取密钥：platform.deepseek.com</p>
+  </div>
+</div>
+
+<div class="toast" id="toast" hidden></div>
+
+<script src="/assets/js/app.js"></script>
+</body>
+</html>
